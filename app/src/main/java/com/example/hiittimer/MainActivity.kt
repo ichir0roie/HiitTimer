@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -36,9 +37,9 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner=this
         binding.viewModel=viewModel
 
-        viewModel.laps=4;
-        viewModel.run=20;
-        viewModel.rest=10;
+        viewModel.lapsAdd(4)
+        viewModel.runAdd(20)
+        viewModel.restAdd(10)
 
     }
 
@@ -58,32 +59,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private var laps=5;
-    private var runSeconds=20;
-    private var restSeconds=10;
     private enum class ActionStates{
         zero,runninng,stopping
     }
     private  var actionState =ActionStates.zero;
 
-    fun onClickLapsButtonLeft(v:View){
-        laps--;
-    }
-    fun onClickLapsButtonRight(v:View){
-        laps++;
-    }
-    fun onClickRunButtonLeft(v:View){
-        runSeconds--;
-    }
-    fun onClickRunButtonRight(v:View){
-        runSeconds++;
-    }
-    fun onClickRestLeft(v:View){
-        restSeconds--;
-    }
-    fun onClickRestRight(v:View){
-        restSeconds++;
-    }
 
     fun onClickAction(v:View){
         when(actionState){
@@ -93,9 +73,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun actionStart(){
-
+        actionState=ActionStates.runninng
+        
     }
     fun actionStop(){
+        actionState=ActionStates.stopping
 
     }
     fun actionReset(){

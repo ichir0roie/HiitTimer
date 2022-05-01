@@ -2,8 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:onClick="onClickRunButtonLeft"
     tools:context=".MainActivity">
 
@@ -46,7 +44,7 @@
                 android:layout_height="30pt"
                 android:layout_gravity="center"
                 android:layout_margin="3pt"
-                android:onClick="onClickLapsButtonLeft"
+                android:onClick="@{()->viewModel.lapsAdd(-1)}"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconSize="15pt"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -60,7 +58,7 @@
                 android:ems="10"
                 android:inputType="number"
                 tools:ignore="SpeakableTextPresentCheck"
-                android:text="@{viewModel.laps}"
+                android:text="@{Integer.toString(viewModel.laps)}"
                 />
 
             <Button
@@ -69,7 +67,7 @@
                 android:layout_height="30pt"
                 android:layout_gravity="center"
                 android:layout_margin="3pt"
-                android:onClick="onClickLapsButtonRight"
+                android:onClick="@{()->viewModel.lapsAdd(1)}"
                 app:icon="@android:drawable/arrow_up_float"
                 app:iconSize="15pt"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -89,6 +87,7 @@
                 android:layout_height="30pt"
                 android:layout_gravity="center"
                 android:layout_margin="3pt"
+                android:onClick="@{()->viewModel.runAdd(-1)}"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconSize="15pt"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -101,7 +100,7 @@
                 android:autofillHints="RunSeconds"
                 android:ems="10"
                 android:inputType="number"
-                android:text="@{viewModel.run}"
+                android:text="@{Integer.toString(viewModel.run)}"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <Button
@@ -110,7 +109,7 @@
                 android:layout_height="30pt"
                 android:layout_gravity="center"
                 android:layout_margin="3pt"
-                android:onClick="onClickRunButtonRight"
+                android:onClick="@{()->viewModel.runAdd(1)}"
                 app:icon="@android:drawable/arrow_up_float"
                 app:iconSize="15pt"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -130,7 +129,7 @@
                 android:layout_height="30pt"
                 android:layout_gravity="center"
                 android:layout_margin="3pt"
-                android:onClick="onClickRestLeft"
+                android:onClick="@{()->viewModel.restAdd(-1)}"
                 app:icon="@android:drawable/arrow_down_float"
                 app:iconSize="15pt"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -142,7 +141,7 @@
                 android:layout_margin="3pt"
                 android:autofillHints="RestSeconds"
                 android:ems="10"
-                android:text="@{viewModel.rest}"
+                android:text="@{Integer.toString(viewModel.rest)}"
                 android:inputType="number"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -152,7 +151,7 @@
                 android:layout_height="30pt"
                 android:layout_gravity="center"
                 android:layout_margin="3pt"
-                android:onClick="onClickRestRight"
+                android:onClick="@{()->viewModel.restAdd(1)}"
                 app:icon="@android:drawable/arrow_up_float"
                 app:iconSize="15pt"
                 tools:ignore="SpeakableTextPresentCheck" />
