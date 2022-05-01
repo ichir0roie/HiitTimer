@@ -1,34 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="onClickRunButtonLeft"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <data>
+<!--        <variable-->
+<!--            name="laps"-->
+<!--            type="android.R.integer" />-->
+<!--        <variable-->
+<!--            name="run"-->
+<!--            type="android.R.integer" />-->
+<!--        <variable-->
+<!--            name="rest"-->
+<!--            type="android.R.integer" />-->
+        <variable
+            name="viewModel"
+            type="com.example.hiittimer.MainViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.HiitTimer.AppBarOverlay">
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="3pt"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textAlignment="center">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.HiitTimer.PopupOverlay" />
+            android:layout_height="wrap_content"
+            android:layout_margin="3pt"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textAlignment="center">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <Button
+                android:id="@+id/lapsButtonLeft"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center"
+                android:layout_margin="3pt"
+                android:onClick="onClickLapsButtonLeft"
+                app:icon="@android:drawable/arrow_down_float"
+                app:iconSize="15pt"
+                tools:ignore="SpeakableTextPresentCheck" />
 
-    <include layout="@layout/content_main" />
+            <EditText
+                android:id="@+id/lapsText"
+                android:layout_width="70pt"
+                android:layout_height="30pt"
+                android:layout_margin="3pt"
+                android:autofillHints="laps"
+                android:ems="10"
+                android:inputType="number"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:text="@{viewModel.laps}"
+                />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+            <Button
+                android:id="@+id/lapsButtonRight"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center"
+                android:layout_margin="3pt"
+                android:onClick="onClickLapsButtonRight"
+                app:icon="@android:drawable/arrow_up_float"
+                app:iconSize="15pt"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3pt"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <Button
+                android:id="@+id/RunButtonLeft"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center"
+                android:layout_margin="3pt"
+                app:icon="@android:drawable/arrow_down_float"
+                app:iconSize="15pt"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/RunText"
+                android:layout_width="70pt"
+                android:layout_height="30pt"
+                android:layout_margin="3pt"
+                android:autofillHints="RunSeconds"
+                android:ems="10"
+                android:inputType="number"
+                android:text="@{viewModel.run}"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/RunButtonRight"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center"
+                android:layout_margin="3pt"
+                android:onClick="onClickRunButtonRight"
+                app:icon="@android:drawable/arrow_up_float"
+                app:iconSize="15pt"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3pt"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <Button
+                android:id="@+id/RestButtonLeft"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center"
+                android:layout_margin="3pt"
+                android:onClick="onClickRestLeft"
+                app:icon="@android:drawable/arrow_down_float"
+                app:iconSize="15pt"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <EditText
+                android:id="@+id/RestText"
+                android:layout_width="70pt"
+                android:layout_height="30pt"
+                android:layout_margin="3pt"
+                android:autofillHints="RestSeconds"
+                android:ems="10"
+                android:text="@{viewModel.rest}"
+                android:inputType="number"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <Button
+                android:id="@+id/RestButtonRight"
+                android:layout_width="30pt"
+                android:layout_height="30pt"
+                android:layout_gravity="center"
+                android:layout_margin="3pt"
+                android:onClick="onClickRestRight"
+                app:icon="@android:drawable/arrow_up_float"
+                app:iconSize="15pt"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="50pt"
+            android:layout_height="30pt"
+            android:layout_margin="5pt"
+            android:longClickable="false"
+            android:onClick="onClickAction"
+            android:text="START">
+
+        </Button>
+
+    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

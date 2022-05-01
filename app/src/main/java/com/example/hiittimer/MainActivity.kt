@@ -9,6 +9,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.get
 import com.example.hiittimer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,22 +21,25 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
+//    private lateinit var viewModel:MainViewModel
+
+//    https://developer.android.com/codelabs/android-databinding
+    private val viewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java) }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+        binding=DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding.lifecycleOwner=this
+        binding.viewModel=viewModel
 
-        setSupportActionBar(binding.toolbar)
+        viewModel.laps=4;
+        viewModel.run=20;
+        viewModel.rest=10;
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,9 +58,48 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    private var laps=5;
+    private var runSeconds=20;
+    private var restSeconds=10;
+    private enum class ActionStates{
+        zero,runninng,stopping
     }
+    private  var actionState =ActionStates.zero;
+
+    fun onClickLapsButtonLeft(v:View){
+        laps--;
+    }
+    fun onClickLapsButtonRight(v:View){
+        laps++;
+    }
+    fun onClickRunButtonLeft(v:View){
+        runSeconds--;
+    }
+    fun onClickRunButtonRight(v:View){
+        runSeconds++;
+    }
+    fun onClickRestLeft(v:View){
+        restSeconds--;
+    }
+    fun onClickRestRight(v:View){
+        restSeconds++;
+    }
+
+    fun onClickAction(v:View){
+        when(actionState){
+            ActionStates.zero->actionStart();
+            ActionStates.runninng->actionStop();
+        }
+    }
+
+    fun actionStart(){
+
+    }
+    fun actionStop(){
+
+    }
+    fun actionReset(){
+
+    }
+
 }
